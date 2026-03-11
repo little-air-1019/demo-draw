@@ -24,8 +24,8 @@ function SlotColumn({ candidates, winner, isSpinning, slotIndex, onSettled }) {
         setSettled(false);
         let tick = 0;
         // Stagger each slot: later slots spin longer
-        const baseDuration = 2000;
-        const staggerDelay = slotIndex * 600;
+        const baseDuration = 800;
+        const staggerDelay = slotIndex * 240;
         const totalDuration = baseDuration + staggerDelay;
         const startSpeed = 50;
         const endSpeed = 250;
@@ -57,7 +57,7 @@ function SlotColumn({ candidates, winner, isSpinning, slotIndex, onSettled }) {
         // Small initial delay per slot for stagger effect
         timeoutRef.current = setTimeout(() => {
             scheduleNext();
-        }, slotIndex * 150);
+        }, slotIndex * 75);
 
         return () => {
             clearTimeout(intervalRef.current);
@@ -151,7 +151,7 @@ export default function RaffleWheel({
             // Small delay after last slot settles for visual polish
             setTimeout(() => {
                 onAnimationComplete();
-            }, 400);
+            }, 200);
         }
     }, [pendingWinners, onAnimationComplete]);
 
@@ -176,7 +176,7 @@ export default function RaffleWheel({
                         initial={{ width: 0 }}
                         animate={{ width: '100%' }}
                         transition={{
-                            duration: 2 + pendingWinners.length * 0.6,
+                            duration: 1 + pendingWinners.length * 0.3,
                             ease: [0.22, 1, 0.36, 1],
                         }}
                     />
